@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8' />
+    <title>Marist Attack Map</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.40.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin=""/>
+    <link rel="stylesheet" href="style/L.Icon.Pulse.css" />
+    <link rel="stylesheet" href="style/Style.css">
+    <script type="text/javascript" src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.11.0/d3.min.js"></script>
+    <script type="text/javascript" src='//unpkg.com/leaflet-arc/bin/leaflet-arc.min.js'></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+    <script type="text/javascript" src="script/L.Icon.Pulse.js"></script>
+    <script src="https://unpkg.com/leaflet-swoopy"></script>
+    <!-- <script type="text/javascript" src="script/Map.js"></script> !-->
+    <script type="text/javascript" src="script/Attack.js"></script>
+
+</head>
+<body>
+<div id='Title'> Marist College `Atlas` Attack Map </div>
+<div id='map'></div>
+<div class='overlay'>
+    <button id='demoDDoS'>Run Demo (DDoS)</button>
+   <!-- <button id='demoInsert'>Run Demo (Insertion)</button> !-->
+   <form id = 'upload' action = "http://10.11.17.141:8080/uploadAttack" method = "POST" 
+       enctype = "multipart/form-data">
+       <input type = "file" name = "file" />
+       <button type = "submit" id='demoUpload'>Upload Custom Attack</button>
+       <br>
+    </form>
+    <a href="http://10.11.17.141:8080/custom_attack_info/">Learn more about custom attacks</a>
+</div>
+
+<script>
+
+
+var mymap = L.map('map',).setView([28,0], 2.5);
+
+L.tileLayer('https://api.mapbox.com/styles/v1/marist/cj9px5lcy5qu92rrrtaiwq5zv/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFyaXN0IiwiYSI6ImNqOXB0YWdyajV1OHcycW5yOGdqN3I1NXIifQ.T8GVVARs8RFqeNg5KrmBCg', {
+    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+    minZoom: 2,
+    maxZoom: 15,
+    //noWrap: true,
+    format: 'png64',
+    id: 'mapbox.dark',
+    accessToken: 'pk.eyJ1IjoibWFyaXN0IiwiYSI6ImNqOXB0YWdyajV1OHcycW5yOGdqN3I1NXIifQ.T8GVVARs8RFqeNg5KrmBCg'
+}).addTo(mymap);
+
+
+</script>
+
+</body>
+</html>
